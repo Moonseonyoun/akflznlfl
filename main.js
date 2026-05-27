@@ -6,7 +6,7 @@ class LottoBalls extends HTMLElement {
     }
 
     set numbers(numbers) {
-        this.shadowRoot.innerHTML = `
+        this.shadowRoot.innerHTML = \`
             <style>
                 .lotto-ball {
                     width: 50px;
@@ -18,11 +18,12 @@ class LottoBalls extends HTMLElement {
                     font-size: 1.5rem;
                     font-weight: bold;
                     margin: 0 0.5rem;
-                    background-color: #f0f0f0;
-                    color: #333;
+                    background-color: var(--ball-bg, #f0f0f0);
+                    color: var(--text-color, #333);
+                    transition: background-color 0.3s, color 0.3s;
                 }
             </style>
-        `;
+        \`;
         numbers.forEach(number => {
             const ball = document.createElement('div');
             ball.classList.add('lotto-ball');
@@ -33,6 +34,14 @@ class LottoBalls extends HTMLElement {
 }
 
 customElements.define('lotto-balls', LottoBalls);
+
+const themeBtn = document.getElementById('theme-btn');
+themeBtn.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', newTheme);
+    themeBtn.textContent = newTheme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+});
 
 document.getElementById('generate-btn').addEventListener('click', () => {
     const lottoNumbersContainer = document.getElementById('lotto-numbers-container');
