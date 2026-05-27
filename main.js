@@ -6,7 +6,7 @@ class LottoBalls extends HTMLElement {
     }
 
     set numbers(numbers) {
-        this.shadowRoot.innerHTML = \`
+        this.shadowRoot.innerHTML = `
             <style>
                 .lotto-ball {
                     width: 50px;
@@ -23,7 +23,7 @@ class LottoBalls extends HTMLElement {
                     transition: background-color 0.3s, color 0.3s;
                 }
             </style>
-        \`;
+        `;
         numbers.forEach(number => {
             const ball = document.createElement('div');
             ball.classList.add('lotto-ball');
