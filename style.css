@@ -1,72 +1,397 @@
 :root {
-    --bg-color: #f0f0f0;
-    --container-bg: white;
-    --text-color: #333;
-    --ball-bg: #e0e0e0;
-    --shadow-color: rgba(0, 0, 0, 0.1);
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gold-gradient: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
+    --bg-color: #f8f9fa;
+    --card-bg: rgba(255, 255, 255, 0.9);
+    --text-main: #2d3436;
+    --text-muted: #636e72;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    --ball-size: 50px;
 }
 
 [data-theme="dark"] {
-    --bg-color: #1a1a1a;
-    --container-bg: #2d2d2d;
-    --text-color: #f0f0f0;
-    --ball-bg: #404040;
-    --shadow-color: rgba(0, 0, 0, 0.5);
+    --bg-color: #0f172a;
+    --card-bg: rgba(30, 41, 59, 0.8);
+    --text-main: #f1f5f9;
+    --text-muted: #94a3b8;
+    --shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 body {
-    font-family: sans-serif;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    transition: background-color 0.4s ease, color 0.4s ease;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 5%;
+    background: transparent;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-main);
+}
+
+.logo i {
+    color: #4CAF50;
+    font-size: 1.8rem;
+}
+
+.icon-btn {
+    background: var(--card-bg);
+    border: none;
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: var(--shadow);
+    color: var(--text-main);
+    width: 45px;
+    height: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    margin: 0;
-    transition: background-color 0.3s, color 0.3s;
+    transition: transform 0.2s;
 }
 
-.container {
+.icon-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Hero Section */
+.hero {
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
-    background-color: var(--container-bg);
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: 0 0 20px var(--shadow-color);
-    transition: background-color 0.3s, box-shadow 0.3s;
-}
-
-.theme-toggle {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
-
-#theme-btn {
-    padding: 0.5rem 1rem;
-    cursor: pointer;
-    border-radius: 5px;
-    border: 1px solid var(--text-color);
-    background: transparent;
-    color: var(--text-color);
-}
-
-h1 {
-    margin-top: 0;
-}
-
-#generate-btn {
-    background-color: #4CAF50;
+    background: var(--primary-gradient);
     color: white;
-    padding: 1rem 2rem;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 1.2rem;
-    margin-top: 1rem;
+    padding: 0 5%;
+    position: relative;
+    clip-path: ellipse(150% 100% at 50% 0%);
 }
 
-#lotto-numbers-container {
+.hero h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    animation: fadeInUp 0.8s ease-out;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    animation: fadeInUp 1s ease-out;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.8rem 1.8rem;
+    border-radius: 30px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.primary-btn {
+    background: var(--gold-gradient);
+    color: #5d4037;
+    box-shadow: 0 4px 15px rgba(253, 160, 133, 0.4);
+}
+
+.primary-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(253, 160, 133, 0.6);
+}
+
+.primary-btn.large {
+    padding: 1.2rem 2.5rem;
+    font-size: 1.2rem;
+}
+
+.secondary-btn {
+    background: #4CAF50;
+    color: white;
+}
+
+.outline-btn {
+    background: transparent;
+    border: 2px solid #764ba2;
+    color: #764ba2;
+}
+
+[data-theme="dark"] .outline-btn {
+    border-color: #a29bfe;
+    color: #a29bfe;
+}
+
+/* Generator Container */
+.generator-container {
+    max-width: 800px;
+    margin: -100px auto 50px;
+    padding: 0 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.glass-card {
+    background: var(--card-bg);
+    backdrop-filter: blur(10px);
+    border-radius: 24px;
+    padding: 3rem;
+    box-shadow: var(--shadow);
+    text-align: center;
+    border: 1px solid rgba(255,255,255,0.2);
+}
+
+.fortune-message {
+    font-style: italic;
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+    min-height: 1.5em;
+}
+
+/* Lotto Balls */
+.lotto-display {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 2.5rem;
+}
+
+.placeholder-balls {
+    display: flex;
+    gap: 15px;
+    opacity: 0.3;
+}
+
+.placeholder-balls span {
+    width: var(--ball-size);
+    height: var(--ball-size);
+    border-radius: 50%;
+    border: 2px dashed var(--text-muted);
     display: flex;
     justify-content: center;
+    align-items: center;
+}
+
+.lotto-ball {
+    width: var(--ball-size);
+    height: var(--ball-size);
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: 800;
+    box-shadow: inset -5px -5px 15px rgba(0,0,0,0.1), 5px 5px 15px rgba(0,0,0,0.1);
+    color: #333;
+    animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
+}
+
+.lotto-ball.bonus {
+    background: var(--gold-gradient);
+    color: white;
+    position: relative;
+}
+
+.lotto-ball.bonus::after {
+    content: 'BONUS';
+    position: absolute;
+    top: -20px;
+    font-size: 0.6rem;
+    font-weight: 900;
+    color: var(--text-muted);
+}
+
+/* Ball Colors by range */
+.ball-blue { background: radial-gradient(circle at 30% 30%, #4facfe, #00f2fe); color: white; }
+.ball-green { background: radial-gradient(circle at 30% 30%, #43e97b, #38f9d7); color: white; }
+.ball-red { background: radial-gradient(circle at 30% 30%, #fa709a, #fee140); color: white; }
+.ball-orange { background: radial-gradient(circle at 30% 30%, #f6d365, #fda085); color: white; }
+.ball-purple { background: radial-gradient(circle at 30% 30%, #a18cd1, #fbc2eb); color: white; }
+
+/* History */
+.history-section {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+.history-list {
+    list-style: none;
+    margin-top: 1rem;
+    text-align: left;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    animation: fadeIn 0.3s ease-in;
+}
+
+[data-theme="dark"] .history-item { border-color: rgba(255,255,255,0.05); }
+
+.history-nums {
+    display: flex;
+    gap: 8px;
+}
+
+.history-ball {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: var(--primary-gradient);
+    color: white;
+    font-size: 0.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Features */
+.features {
+    padding: 4rem 5%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.feature-card {
+    background: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s;
+}
+
+.feature-card:hover { transform: translateY(-10px); }
+
+.feature-card i {
+    font-size: 2.5rem;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes popIn {
+    0% { opacity: 0; transform: scale(0); }
+    100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2.2rem; }
+    .generator-container { margin-top: -50px; }
+    .glass-card { padding: 1.5rem; }
+    .lotto-ball { --ball-size: 40px; font-size: 1rem; }
+    .action-group { flex-direction: column; }
+    .btn { width: 100%; justify-content: center; }
+}
+footer {
+    padding: 3rem 5%;
+    background: var(--card-bg);
+    text-align: center;
+    margin-top: 4rem;
+}
+
+.footer-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.social-links a { color: var(--text-muted); transition: color 0.3s; }
+.social-links a:hover { color: #764ba2; }
+
+.guide {
+    text-align: center;
+    padding: 3rem 5%;
+}
+
+.guide-steps {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
     margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.step span {
+    background: var(--primary-gradient);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

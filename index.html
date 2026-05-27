@@ -1,21 +1,123 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lotto Number Generator</title>
+    <title>Lucky Lotto Generator | Your Path to Fortune</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <div class="theme-toggle">
-        <button id="theme-btn">Switch to Dark Mode</button>
-    </div>
-    <div class="container">
-        <h1>Lotto Number Generator</h1>
-        <button id="generate-btn">Generate Numbers</button>
-        <div id="lotto-numbers-container"></div>
-    </div>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-clover"></i>
+                <span>LuckyLotto</span>
+            </div>
+            <div class="nav-controls">
+                <button id="theme-btn" class="icon-btn">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Lucky Lotto Generator</h1>
+                <p>Generate your lucky numbers instantly and chase your fortune today.</p>
+                <div class="hero-cta">
+                    <button id="generate-btn" class="btn primary-btn large">
+                        <i class="fas fa-wand-magic-sparkles"></i> Generate Numbers
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Generator Section -->
+        <section id="generator-section" class="generator-container">
+            <div class="glass-card">
+                <div id="fortune-message" class="fortune-message">
+                    Click the button to reveal your luck!
+                </div>
+                
+                <div id="lotto-display" class="lotto-display">
+                    <!-- Balls will be injected here -->
+                    <div class="placeholder-balls">
+                        <span>?</span><span>?</span><span>?</span><span>?</span><span>?</span><span>?</span><span class="bonus">?</span>
+                    </div>
+                </div>
+
+                <div class="action-group">
+                    <button id="copy-btn" class="btn secondary-btn" disabled>
+                        <i class="fas fa-copy"></i> Copy Numbers
+                    </button>
+                    <button id="reset-btn" class="btn outline-btn">
+                        <i class="fas fa-undo"></i> Reset
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="section-title">
+                <h2>Why Choose LuckyLotto?</h2>
+            </div>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <i class="fas fa-bolt"></i>
+                    <h3>Instant Generation</h3>
+                    <p>Get your numbers in milliseconds with our optimized algorithm.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-shield-halved"></i>
+                    <h3>Pure Randomness</h3>
+                    <p>Our generator uses cryptographic-grade entropy for fair results.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Bonus Included</h3>
+                    <p>We provide a full set including the critical bonus number.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- History Section -->
+        <section class="history-section">
+            <div class="glass-card">
+                <h3><i class="fas fa-clock-rotate-left"></i> Recent History</h3>
+                <ul id="history-list" class="history-list">
+                    <li class="empty-history">No history yet. Start generating!</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- How to Use -->
+        <section class="guide">
+            <h3>How to Use</h3>
+            <div class="guide-steps">
+                <div class="step"><span>1</span> Click Generate</div>
+                <div class="step"><span>2</span> Check your Luck</div>
+                <div class="step"><span>3</span> Win the Jackpot</div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2026 LuckyLotto Generator. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
     <script src="main.js"></script>
 </body>
 </html>
